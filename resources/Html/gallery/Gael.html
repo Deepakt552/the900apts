@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Gallery · Every Angle</title>
+  <!-- Google Fonts: Cormorant Garamond + Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom style overrides & keyframes -->
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #0F0F0F;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3, h4, .font-serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    /* gold accent */
+    .gold { color: #C9A96E; }
+    .border-gold { border-color: #C9A96E; }
+    .bg-gold { background-color: #C9A96E; }
+    .hover\:bg-gold-light:hover { background-color: #dbb97a; }
+    .text-gold { color: #C9A96E; }
+
+    /* premium glassmorphism */
+    .glass {
+      background: rgba(24, 24, 24, 0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(201, 169, 110, 0.15);
+    }
+
+    /* hero overlay gradient */
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.40) 70%, rgba(15,15,15,0.75) 100%);
+    }
+
+    /* scroll indicator pulse */
+    @keyframes scrollPulse {
+      0% { opacity: 0.4; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(6px); }
+      100% { opacity: 0.4; transform: translateY(0); }
+    }
+    .animate-scroll { animation: scrollPulse 2.4s infinite ease-in-out; }
+
+    /* fade-up on scroll (intersection) */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* masonry card */
+    .gallery-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.7);
+      transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.5s ease;
+      background: #181818;
+    }
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+      display: block;
+    }
+    .gallery-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 28px 48px -16px rgba(0,0,0,0.9);
+    }
+    .gallery-card:hover img {
+      transform: scale(1.07);
+    }
+    /* overlay + gold border + plus icon */
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 15, 15, 0.55);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      border: 2px solid transparent;
+      transition: opacity 0.5s ease, border 0.3s ease;
+    }
+    .gallery-card:hover .gallery-overlay {
+      opacity: 1;
+      border: 2px solid #C9A96E;
+    }
+    .plus-icon {
+      font-size: 3.6rem;
+      font-weight: 200;
+      color: #C9A96E;
+      transform: scale(0.9);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+      text-shadow: 0 0 20px rgba(201, 169, 110, 0.3);
+    }
+    .gallery-card:hover .plus-icon {
+      transform: scale(1.1);
+    }
+    /* CTA button */
+    .btn-outline-gold {
+      background: transparent;
+      border: 1.5px solid #C9A96E;
+      color: #fff;
+      padding: 0.9rem 3.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(2px);
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-outline-gold:hover {
+      background: #C9A96E;
+      color: #0F0F0F;
+      box-shadow: 0 8px 28px -6px rgba(201, 169, 110, 0.3);
+      transform: scale(1.02);
+      border-color: #C9A96E;
+    }
+    /* responsive tweaks */
+    @media (max-width: 640px) {
+      .hero-title { font-size: 3.6rem; line-height: 1.1; }
+      .hero-sub { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== FULL-WIDTH HERO ====== -->
+  <section class="relative w-full h-screen overflow-hidden flex items-center justify-center text-center">
+    <!-- background image with gradient overlay -->
+    <div class="absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('https://picsum.photos/1600/1000?random=99');"></div>
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <!-- content -->
+    <div class="relative z-10 px-6 max-w-4xl mx-auto">
+      <span class="text-gold font-light tracking-[0.3em] uppercase text-sm md:text-base mb-4 block">Gallery</span>
+      <h1 class="font-serif text-6xl sm:text-7xl md:text-8xl font-light leading-[1.05] tracking-wide text-white">
+        Every Angle.<br>
+        <span class="text-gold font-medium">Every Detail.</span>
+      </h1>
+      <p class="mt-6 text-sm md:text-base font-light text-white/80 max-w-xl mx-auto tracking-wide leading-relaxed">
+        A curated collection of timeless spaces, refined finishes, and architectural poetry.
+      </p>
+      <!-- scroll indicator -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition">
+        <span class="text-[10px] tracking-[0.3em] uppercase text-white/50">Scroll</span>
+        <div class="w-5 h-8 border border-white/30 rounded-full flex justify-center pt-2 animate-scroll">
+          <span class="block w-0.5 h-2 bg-gold rounded-full"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== MASONRY GALLERY (no filters, all images) ====== -->
+  <section class="py-24 px-4 md:px-8 lg:px-16 mx-auto" id="gallery">
+    <div class="text-center mb-14 fade-up">
+      <span class="text-gold text-sm tracking-[0.3em] uppercase font-light block">The Collection</span>
+      <h2 class="font-serif text-5xl md:text-6xl font-light text-white mt-2">Visual Symphony</h2>
+    </div>
+
+    <!-- Masonry grid: 4-col desktop, 2-col tablet, 1-col mobile -->
+    <div class="columns-1 sm:columns-2 xl:columns-4 gap-5 space-y-5">
+      <!-- 18–24 placeholder images with mixed portrait/landscape -->
+      <!-- Each card uses random picsum with different dimensions -->
+      
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/900?random=1" alt="luxury interior" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/700/500?random=2" alt="luxury exterior" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/800?random=3" alt="modern living" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/800/600?random=4" alt="dining area" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/950?random=5" alt="bedroom suite" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/700/700?random=6" alt="bathroom" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/750?random=7" alt="terrace view" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/850/600?random=8" alt="kitchen" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/850?random=9" alt="pool area" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/700/550?random=10" alt="lobby" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/920?random=11" alt="penthouse" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/750/600?random=12" alt="spa" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/880?random=13" alt="study" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/800/700?random=14" alt="wine cellar" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/780?random=15" alt="gym" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/720/520?random=16" alt="garden" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/860?random=17" alt="sky lounge" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/850/650?random=18" alt="cinema" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/810?random=19" alt="entrance" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/700/580?random=20" alt="rooftop" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+
+      <!-- two extra for a full 22 images (masonry looks rich) -->
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/600/900?random=21" alt="art corridor" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+      <div class="gallery-card break-inside-avoid fade-up">
+        <img src="https://picsum.photos/780/540?random=22" alt="infinity pool" loading="lazy">
+        <div class="gallery-overlay"><span class="plus-icon">+</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA SECTION ====== -->
+  <section class="py-24 px-6 md:px-12 lg:px-24 bg-[#181818] border-t border-white/5">
+    <div class="max-w-4xl mx-auto text-center fade-up">
+      <h2 class="font-serif text-4xl md:text-6xl font-light text-white leading-[1.2]">
+        Experience Luxury <br class="sm:hidden"><span class="text-gold">in Every Detail</span>
+      </h2>
+      <p class="mt-6 text-white/70 text-sm md:text-base max-w-2xl mx-auto font-light tracking-wide leading-relaxed">
+        Explore beautifully designed residences, sophisticated amenities, and timeless architecture crafted for elevated living.
+      </p>
+      <div class="mt-10">
+        <button class="btn-outline-gold">Schedule a Tour</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER (minimal) ====== -->
+  <footer class="py-8 text-center text-white/30 text-[10px] tracking-[0.2em] uppercase border-t border-white/5">
+    <span class="gold">✦</span> The Gallery · Every Angle
+  </footer>
+
+  <!-- ====== FADE-UP ON SCROLL (intersection observer) ====== -->
+  <script>
+    (function() {
+      const fadeElements = document.querySelectorAll('.fade-up');
+      if (fadeElements.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+        fadeElements.forEach(el => observer.observe(el));
+      }
+    })();
+  </script>
+
+</body>
+</html>

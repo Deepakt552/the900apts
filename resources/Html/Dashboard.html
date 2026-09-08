@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 900 · Admin Dashboard</title>
+  <!-- Font Awesome 6 (Free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #f4f7fc;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    .sidebar {
+      width: 280px;
+      background: #0b1a2f;
+      color: #e6edf5;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 18px;
+      box-shadow: 4px 0 12px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: white;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .sidebar .brand i {
+      color: #5f9eff;
+      font-size: 28px;
+    }
+
+    .sidebar .nav-section {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #8399b0;
+      margin: 20px 0 8px 8px;
+    }
+
+    .sidebar .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      color: #b6cde0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      margin: 2px 0;
+    }
+
+    .sidebar .nav-item i {
+      width: 22px;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    .sidebar .nav-item:hover {
+      background: #1d334a;
+      color: white;
+    }
+
+    .sidebar .nav-item.active {
+      background: #1f3a57;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .sidebar .nav-item .badge {
+      margin-left: auto;
+      background: #2f4b6e;
+      padding: 2px 10px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .sidebar .user-card {
+      margin-top: auto;
+      padding: 16px 12px;
+      background: #13273e;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar .user-card .avatar {
+      width: 42px;
+      height: 42px;
+      background: #2a4b70;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: white;
+    }
+
+    .sidebar .user-card .user-info {
+      flex: 1;
+    }
+
+    .sidebar .user-card .user-info .name {
+      font-weight: 600;
+      color: white;
+    }
+    .sidebar .user-card .user-info .role {
+      font-size: 12px;
+      color: #8aa4be;
+    }
+
+    /* ---------- MAIN CONTENT ---------- */
+    .main {
+      flex: 1;
+      padding: 28px 36px 40px 36px;
+      overflow-x: auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .top-bar h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #0b1e2f;
+      letter-spacing: -0.3px;
+    }
+
+    .top-bar h1 small {
+      font-weight: 400;
+      font-size: 16px;
+      color: #5d738b;
+      margin-left: 12px;
+    }
+
+    .top-bar .actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .top-bar .actions .date-badge {
+      background: white;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      border: 1px solid #e4ecf3;
+      color: #1d3a56;
+    }
+
+    .top-bar .actions i {
+      background: white;
+      padding: 10px;
+      border-radius: 40px;
+      border: 1px solid #e4ecf3;
+      color: #2b4b6e;
+      cursor: default;
+    }
+
+    /* ---------- STAT CARDS ---------- */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 22px;
+      margin-bottom: 36px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 24px;
+      padding: 22px 20px;
+      box-shadow: 0 4px 14px rgba(0, 20, 40, 0.03);
+      border: 1px solid #eaedf2;
+      transition: 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat-card:hover {
+      border-color: #cbd8e8;
+      box-shadow: 0 8px 18px rgba(0, 40, 80, 0.04);
+    }
+
+    .stat-left .label {
+      font-size: 14px;
+      color: #5e748b;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    .stat-left .value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0a1e30;
+      margin-top: 4px;
+    }
+
+    .stat-card .icon {
+      background: #eef5fb;
+      padding: 12px;
+      border-radius: 40px;
+      color: #1c4b78;
+      font-size: 22px;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ---------- CARDS (two column) ---------- */
+    .row-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 22px 24px 28px 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      border: 1px solid #eef3f8;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .card-header h3 {
+      font-weight: 600;
+      font-size: 18px;
+      color: #122b41;
+    }
+
+    .card-header .link {
+      color: #2b6c9e;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .card-header .link i {
+      font-size: 12px;
+    }
+
+    /* ----- table inside card ----- */
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      color: #6b829a;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eef2f7;
+    }
+
+    td {
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f4fa;
+      color: #1f3b54;
+    }
+
+    td .status {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #ecf3fa;
+      color: #1f4b78;
+    }
+
+    td .status.published { background: #e0f0e5; color: #0d5e3b; }
+    td .status.draft { background: #f0ecf0; color: #6b5f6b; }
+    td .status.pending { background: #fff3d6; color: #a86f1a; }
+    td .status.shortlisted { background: #dbeafe; color: #1e4a7a; }
+
+    .badge-sm {
+      background: #eef3fa;
+      padding: 2px 10px;
+      border-radius: 40px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #1f3f5f;
+    }
+
+    /* ----- recent activity / comments ----- */
+    .activity-item {
+      display: flex;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f4fa;
+    }
+
+    .activity-item:last-child {
+      border-bottom: 0;
+    }
+
+    .activity-item .icon-circle {
+      width: 38px;
+      height: 38px;
+      background: #eaf1fa;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1f5582;
+    }
+
+    .activity-item .content .title {
+      font-weight: 500;
+      color: #122b3f;
+    }
+
+    .activity-item .content .meta {
+      font-size: 13px;
+      color: #66819b;
+    }
+
+    .activity-item .time {
+      margin-left: auto;
+      font-size: 12px;
+      color: #748ca5;
+    }
+
+    /* ---------- FULL WIDTH TABLE ---------- */
+    .full-table {
+      background: white;
+      border-radius: 24px;
+      padding: 16px 20px 20px 20px;
+      border: 1px solid #eef3f8;
+      margin-top: 12px;
+    }
+
+    .full-table .card-header {
+      padding: 0 4px 8px 4px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 1024px) {
+      .row-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 78px;
+        padding: 18px 8px;
+        align-items: center;
+      }
+      .sidebar .brand span, 
+      .sidebar .nav-item span,
+      .sidebar .nav-section,
+      .sidebar .user-card .user-info,
+      .sidebar .nav-item .badge {
+        display: none;
+      }
+      .sidebar .nav-item {
+        justify-content: center;
+        padding: 12px 0;
+      }
+      .sidebar .user-card {
+        flex-direction: column;
+        padding: 10px 0;
+      }
+      .main {
+        padding: 18px 16px;
+      }
+      .stat-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+
+    /* misc */
+    .text-muted { color: #6a829c; }
+    .mt-2 { margin-top: 8px; }
+    .mb-1 { margin-bottom: 6px; }
+    .fw-600 { font-weight: 600; }
+    .flex { display: flex; align-items: center; gap: 10px; }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="brand">
+    <i class="fas fa-building"></i>
+    <span>The 900</span>
+  </div>
+
+  <div class="nav-section">Main</div>
+  <a href="#" class="nav-item active"><i class="fas fa-chart-pie"></i> <span>Dashboard</span></a>
+  <a href="#" class="nav-item"><i class="fas fa-blog"></i> <span>Blogs</span> <span class="badge">3</span></a>
+  <a href="#" class="nav-item"><i class="fas fa-briefcase"></i> <span>Careers</span> <span class="badge">2</span></a>
+  <a href="#" class="nav-item"><i class="fas fa-envelope"></i> <span>Inquiries</span> <span class="badge">6</span></a>
+
+  <div class="nav-section">Content</div>
+  <a href="#" class="nav-item"><i class="fas fa-images"></i> <span>Gallery</span></a>
+  <a href="#" class="nav-item"><i class="fas fa-tags"></i> <span>Properties</span></a>
+  <a href="#" class="nav-item"><i class="fas fa-cog"></i> <span>Settings</span></a>
+
+  <div class="user-card">
+    <div class="avatar"><i class="fas fa-user"></i></div>
+    <div class="user-info">
+      <div class="name">Admin</div>
+      <div class="role">admin@the900.com</div>
+    </div>
+    <i class="fas fa-ellipsis-v" style="color:#627d99; font-size:14px;"></i>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <!-- top bar -->
+  <div class="top-bar">
+    <h1>
+      Dashboard 
+      <small><i class="far fa-calendar-alt"></i> Aug 07, 2026</small>
+    </h1>
+    <div class="actions">
+      <span class="date-badge"><i class="far fa-clock"></i> Night shift 9:30 PM</span>
+      <i class="fas fa-bell"></i>
+      <i class="fas fa-user-circle" style="font-size:24px; padding:4px 6px;"></i>
+    </div>
+  </div>
+
+  <!-- stat cards -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="label">Total Blogs</div>
+        <div class="value">3</div>
+        <div style="font-size:13px; color:#4e7da0;"><i class="fas fa-check-circle" style="font-size:11px;"></i> 2 published</div>
+      </div>
+      <div class="icon"><i class="fas fa-newspaper"></i></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="label">Job Applications</div>
+        <div class="value">13</div>
+        <div style="font-size:13px; color:#4e7da0;"><i class="fas fa-user-plus"></i> 5 shortlisted</div>
+      </div>
+      <div class="icon"><i class="fas fa-users"></i></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="label">Contact Inquiries</div>
+        <div class="value">6</div>
+        <div style="font-size:13px; color:#4e7da0;"><i class="fas fa-eye"></i> 6 unread</div>
+      </div>
+      <div class="icon"><i class="fas fa-message"></i></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="label">Blog Views</div>
+        <div class="value">5</div>
+        <div style="font-size:13px; color:#4e7da0;"><i class="fas fa-arrow-up"></i> +2 today</div>
+      </div>
+      <div class="icon"><i class="fas fa-chart-line"></i></div>
+    </div>
+  </div>
+
+  <!-- row: recent blogs + comments -->
+  <div class="row-cards">
+    <!-- recent blogs -->
+    <div class="card">
+      <div class="card-header">
+        <h3><i class="fas fa-pen-fancy" style="margin-right:10px; color:#2b6c9e;"></i> Recent Blogs</h3>
+        <a href="#" class="link">View all <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Title</th><th>Status</th><th>Date</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Work Order Coordinator – Night Shift</td>
+              <td><span class="status published">Published</span></td>
+              <td>Aug 06</td>
+            </tr>
+            <tr>
+              <td>Urgent Opening For Account Payable</td>
+              <td><span class="status published">Published</span></td>
+              <td>Aug 07</td>
+            </tr>
+            <tr>
+              <td>Customer Service Executive</td>
+              <td><span class="status published">Published</span></td>
+              <td>Aug 07</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:14px; border-top:1px solid #eef2f7; padding-top:14px; display:flex; gap:18px; flex-wrap:wrap;">
+        <span><i class="far fa-comment" style="color:#3f6a91;"></i> 2 comments</span>
+        <span><i class="far fa-heart" style="color:#3f6a91;"></i> 0 likes</span>
+        <span><i class="far fa-eye" style="color:#3f6a91;"></i> 5 views</span>
+      </div>
+    </div>
+
+    <!-- recent comments / activity -->
+    <div class="card">
+      <div class="card-header">
+        <h3><i class="fas fa-comment-dots" style="margin-right:10px; color:#2b6c9e;"></i> Latest Comments</h3>
+        <a href="#" class="link">More <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="activity-item">
+        <div class="icon-circle"><i class="fas fa-user"></i></div>
+        <div class="content">
+          <div class="title">Admin on “Work Order Coordinator”</div>
+          <div class="meta">“Hello”</div>
+        </div>
+        <div class="time">1h ago</div>
+      </div>
+      <div class="activity-item">
+        <div class="icon-circle"><i class="fas fa-user"></i></div>
+        <div class="content">
+          <div class="title">Admin on “Work Order Coordinator”</div>
+          <div class="meta">“yes pleas give your intro”</div>
+        </div>
+        <div class="time">2h ago</div>
+      </div>
+      <div class="activity-item" style="border-bottom:0;">
+        <div class="icon-circle"><i class="fas fa-envelope"></i></div>
+        <div class="content">
+          <div class="title">New inquiry from itdev</div>
+          <div class="meta">“Hello how can u help you ?”</div>
+        </div>
+        <div class="time">1d ago</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- career applications table (full width) -->
+  <div class="full-table">
+    <div class="card-header">
+      <h3><i class="fas fa-briefcase" style="margin-right:10px; color:#2b6c9e;"></i> Recent Career Applications</h3>
+      <a href="#" class="link">All applications <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Applicant</th>
+            <th>Position</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Applied</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="fw-600">it</span></td>
+            <td>Financial Reporting</td>
+            <td>itdev1@navkarservices.com</td>
+            <td><span class="status pending">Pending</span></td>
+            <td>Aug 07</td>
+          </tr>
+          <tr>
+            <td><span class="fw-600">asd</span></td>
+            <td>Office Assistant</td>
+            <td>asd@gmail.com</td>
+            <td><span class="status shortlisted">Shortlisted</span></td>
+            <td>Aug 07</td>
+          </tr>
+          <tr>
+            <td><span class="fw-600">qwe</span></td>
+            <td>Office Assistant</td>
+            <td>qwe@gmail.com</td>
+            <td><span class="status shortlisted">Shortlisted</span></td>
+            <td>Aug 07</td>
+          </tr>
+          <tr>
+            <td><span class="fw-600">pkiii</span></td>
+            <td>Office Assistant</td>
+            <td>pkii@gmail.com</td>
+            <td><span class="status draft">Rejected</span></td>
+            <td>Aug 07</td>
+          </tr>
+          <tr>
+            <td><span class="fw-600">xyz</span></td>
+            <td>Financial Reporting</td>
+            <td>xyz@gmail.com</td>
+            <td><span class="status pending">Pending</span></td>
+            <td>Aug 07</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:20px; font-size:13px; color:#446686;">
+      <span><i class="fas fa-file-alt"></i> 13 total applications</span>
+      <span><i class="fas fa-check-circle" style="color:#1f8b4c;"></i> 2 shortlisted</span>
+      <span><i class="fas fa-clock" style="color:#b87a1b;"></i> 8 pending</span>
+    </div>
+  </div>
+
+  <!-- small footer note -->
+  <div style="margin-top:32px; border-top:1px solid #dce5ef; padding-top:18px; display: flex; justify-content: space-between; flex-wrap:wrap; color:#4d6e89; font-size:14px;">
+    <span><i class="far fa-database"></i> Database: the900apts · 15 tables</span>
+    <span><i class="far fa-clock"></i> Generated: Aug 08, 2026 01:19 AM</span>
+    <span><i class="fas fa-server"></i> MariaDB 10.4.32 · PHP 8.2.12</span>
+  </div>
+</main>
+
+</body>
+</html>

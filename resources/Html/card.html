@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bright Gold Glow</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #020b13;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gold-glow {
+            position: relative;
+            width: 320px;
+            height: 2px;
+            /* Bright GOLD center */
+            background: linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(241, 184, 63, 0.15) 20%,
+                #F1B83F 38%,
+                #FFD76A 47%,
+                #FFF1B8 50%,
+                #FFD76A 53%,
+                #F1B83F 62%,
+                rgba(241, 184, 63, 0.15) 80%,
+                transparent 100%
+            );
+
+        }
+
+        /* Horizontal + vertical glow */
+        .gold-glow::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 18px;
+            background: linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(241, 184, 63, 0.18) 20%,
+                rgba(241, 184, 63, 0.65) 40%,
+                rgba(255, 215, 106, 0.9) 50%,
+                rgba(241, 184, 63, 0.65) 60%,
+                rgba(241, 184, 63, 0.18) 80%,
+                transparent 100%
+            );
+            filter: blur(10px);
+        }
+
+        /* Strong center glow */
+        .gold-glow::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 15px;
+            background: rgba(255, 196, 70, 0.65);
+            border-radius: 50%;
+            filter: blur(12px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gold-glow"></div>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bright Gold Glow</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="m-0 min-h-screen bg-[#020b13] flex items-center justify-center">
+
+    <div
+        class="relative w-[320px] h-[2px]
+        bg-[linear-gradient(to_right,transparent_0%,rgba(241,184,63,0.15)_20%,#F1B83F_38%,#FFD76A_47%,#FFF1B8_50%,#FFD76A_53%,#F1B83F_62%,rgba(241,184,63,0.15)_80%,transparent_100%)]
+        before:content-['']
+        before:absolute before:left-0 before:right-0 before:top-1/2
+        before:-translate-y-1/2
+        before:h-8
+        before:bg-[linear-gradient(to_right,transparent_0%,rgba(241,184,63,0.18)_20%,rgba(241,184,63,0.65)_40%,rgba(255,215,106,0.9)_50%,rgba(241,184,63,0.65)_60%,rgba(241,184,63,0.18)_80%,transparent_100%)]
+        before:blur-[10px]
+        after:content-['']
+        after:absolute after:left-1/2 after:top-1/2
+        after:-translate-x-1/2 after:-translate-y-1/2
+        after:w-[90px] after:h-[45px]
+        after:bg-[rgba(255,196,70,0.65)]
+        after:rounded-[50%]
+        after:blur-[12px]"
+    ></div>
+
+</body>
+</html> -->

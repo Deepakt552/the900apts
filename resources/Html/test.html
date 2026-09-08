@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxury Residence · Hero</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts & minimal custom overrides (only what Tailwind cannot do) -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,400..600&display=swap');
+    * { font-family: 'Inter', sans-serif; }
+    /* custom colors & backdrop (tailwind lacks these exact values) */
+    .bg-gold { background-color: #C79A5B; }
+    .text-gold { color: #C79A5B; }
+    .text-gold-light { color: #E2B878; }
+    .border-gold { border-color: #C79A5B; }
+    .bg-dark-secondary { background-color: #111827; }
+    .hero-overlay { background: linear-gradient(135deg, rgba(9,17,29,0.82) 0%, rgba(9,17,29,0.40) 70%); }
+    .glass-card { background: rgba(17,24,39,0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 25px 40px -15px rgba(0,0,0,0.7); }
+    .nav-blur { background: rgba(9,17,29,0.65); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,215,140,0.15); }
+    .trapezoid-logo { clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%); background: black; box-shadow: 0 20px 45px rgba(0,0,0,.25); }
+    @media (max-width: 1023px) { .trapezoid-logo { clip-path: polygon(0% 0%, 95% 0%, 100% 100%, 0% 100%); padding-right: 1.2rem; } }
+    .hero-bg { background-image: url('/images/hero.jpg'); background-size: cover; background-position: center center; }
+    .building-img { background-image: url('/images/building.png'); background-size: 90% auto; background-repeat: no-repeat; background-position: bottom right; }
+    .divider-gold { width: 56px; height: 3px; background: #C79A5B; border-radius: 4px; }
+    .btn-primary { background-color: #C79A5B; color: white; box-shadow: 0 12px 30px -10px rgba(199,154,91,0.35); transition: all 0.2s ease; }
+    .btn-primary:hover { background-color: #E2B878; transform: translateY(-2px); box-shadow: 0 18px 35px -10px rgba(199,154,91,0.5); }
+    .btn-secondary { border: 1.5px solid rgba(255,255,255,0.5); color: white; background: transparent; transition: all 0.2s ease; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: #E2B878; transform: translateY(-2px); }
+    .contact-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.15); }
+    .hover-scale-img { transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1); }
+    .hover-scale-img:hover { transform: scale(1.02); }
+    @media (max-width: 768px) { .contact-divider { display: none; } }
+  </style>
+</head>
+<body class="">
+
+  <div class="absolute top-0 left-0 z-[100]">
+    <div class="trapezoid-logo h-[100px] w-[260px] flex items-center pl-10 shadow-2xl">
+      <span class="text-3xl font-bold text-white">The 900</span>
+    </div>
+  </div>
+
+  <nav class="absolute top-0 left-0 w-full z-50 nav-blur h-[85px] flex items-center">
+    <div class="max-w-8xl mx-auto w-full flex items-center justify-end px-6 lg:px-10">
+      <div class="hidden lg:flex flex-1 justify-center space-x-8 text-sm uppercase tracking-wider font-semibold text-gray-300 ml-44"></div>
+      <div class="flex items-center gap-3">
+        <button class="hidden sm:inline-block btn-secondary text-sm font-medium px-5 py-2 rounded-md">Sign In</button>
+        <button class="btn-primary text-sm font-medium px-5 py-2 rounded-md">Resident Portal</button>
+        <button class="lg:hidden ml-2 text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+</body>
+</html>

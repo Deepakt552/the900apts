@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The 900 - Login</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D9A52E',
+                        goldLight: '#F4C95D',
+                        dark: '#090A0C'
+                    },
+                    fontFamily: {
+                        serif: ['Georgia', 'Times New Roman', 'serif'],
+                        sans: ['Arial', 'Helvetica', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #070809;
+        }
+
+        .login-bg {
+            background-image:
+                linear-gradient(
+                    rgba(5, 6, 8, 0.15),
+                    rgba(5, 6, 8, 0.15)
+                ),
+                url('./login-bg.png');
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .gold-border {
+            border: 2px solid #c99328;
+            box-shadow:
+                0 0 12px rgba(217, 165, 46, 0.18),
+                inset 0 0 25px rgba(255, 255, 255, 0.015);
+        }
+
+        .gold-input {
+            border: 1.5px solid #8c641c;
+            background: rgba(7, 8, 10, 0.72);
+            transition: all 0.25s ease;
+        }
+
+        .gold-input:focus {
+            outline: none;
+            border-color: #e2af3a;
+            box-shadow: 0 0 0 2px rgba(217, 165, 46, 0.08);
+        }
+
+        .gold-button {
+            background: linear-gradient(
+                180deg,
+                #f5c955 0%,
+                #dca82f 55%,
+                #b77d19 100%
+            );
+
+            box-shadow:
+                0 5px 18px rgba(218, 165, 46, 0.18),
+                inset 0 1px rgba(255,255,255,0.35);
+        }
+
+        .gold-button:hover {
+            filter: brightness(1.08);
+        }
+
+        .logo-900 {
+            font-family: Georgia, serif;
+            font-size: 108px;
+            line-height: 0.8;
+            letter-spacing: -13px;
+            font-weight: 400;
+        }
+
+        .diamond {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #dca82f;
+            transform: rotate(45deg);
+        }
+
+        .line {
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #9b7427
+            );
+        }
+
+        .line-right {
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                #9b7427,
+                transparent
+            );
+        }
+
+        input::placeholder {
+            color: #858589;
+        }
+
+        @media (max-width: 640px) {
+            .login-card {
+                width: calc(100% - 28px);
+                padding: 32px 22px;
+            }
+
+            .logo-900 {
+                font-size: 78px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-bg min-h-screen flex items-center justify-center py-8 px-4">
+
+    <!-- LOGIN CARD -->
+    <div class="login-card w-[755px] rounded-[28px] gold-border
+                bg-black/75 backdrop-blur-[2px]
+                px-[64px] py-[58px]">
+
+        <!-- LOGO -->
+        <div class="text-center">
+
+            <div class="text-[27px] text-white font-serif tracking-wide">
+                THE
+            </div>
+
+            <div class="logo-900 text-white mt-5">
+                900
+            </div>
+
+            <!-- GOLD DIVIDER -->
+            <div class="flex items-center justify-center gap-5 mt-12">
+
+                <div class="w-[88px] line"></div>
+
+                <div class="diamond"></div>
+
+                <div class="w-[88px] line-right"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HEADING -->
+        <div class="text-center mt-11">
+
+            <h1 class="text-[46px] leading-none font-serif">
+                <span class="text-gold">Welcome</span>
+                <span class="text-white"> Back</span>
+            </h1>
+
+            <p class="text-[20px] text-gray-400 mt-5">
+                Sign in to your account to continue
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+        <form class="mt-12">
+
+            <!-- EMAIL -->
+            <div>
+                <label class="block text-[21px] font-serif
+                              text-gold mb-3">
+                    Email
+                </label>
+
+                <div class="gold-input h-[86px] rounded-[11px]
+                            flex items-center px-7">
+
+                    <!-- USER ICON -->
+                    <svg
+                        class="w-9 h-9 text-gold mr-6 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        viewBox="0 0 24 24">
+
+                        <circle cx="12" cy="7" r="4"></circle>
+
+                        <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path>
+
+                    </svg>
+
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        class="w-full bg-transparent border-0
+                               text-white text-[21px]
+                               focus:ring-0 outline-none">
+                </div>
+            </div>
+
+
+            <!-- PASSWORD -->
+            <div class="mt-7">
+
+                <label class="block text-[21px] font-serif
+                              text-gold mb-3">
+                    Password
+                </label>
+
+                <div class="gold-input h-[86px] rounded-[11px]
+                            flex items-center px-7">
+
+                    <!-- LOCK ICON -->
+                    <svg
+                        class="w-9 h-9 text-gold mr-6 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        viewBox="0 0 24 24">
+
+                        <rect
+                            x="5"
+                            y="10"
+                            width="14"
+                            height="11"
+                            rx="2">
+                        </rect>
+
+                        <path d="M8 10V7a4 4 0 018 0v3"></path>
+
+                        <circle
+                            cx="12"
+                            cy="15"
+                            r="1">
+                        </circle>
+
+                    </svg>
+
+
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Enter your password"
+                        class="w-full bg-transparent border-0
+                               text-white text-[21px]
+                               focus:ring-0 outline-none">
+
+
+                    <!-- EYE -->
+                    <button
+                        type="button"
+                        onclick="togglePassword()"
+                        class="ml-4 text-gold
+                               hover:text-yellow-300
+                               transition">
+
+                        <svg
+                            id="eyeIcon"
+                            class="w-9 h-9"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            viewBox="0 0 24 24">
+
+                            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"></path>
+
+                            <circle cx="12" cy="12" r="3"></circle>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- REMEMBER / FORGOT -->
+            <div class="flex items-center justify-between mt-8">
+
+                <label class="flex items-center gap-4
+                              text-[19px] text-gray-300
+                              cursor-pointer">
+
+                    <input
+                        type="checkbox"
+                        checked
+                        class="w-8 h-8 rounded-[5px]
+                               border-gold
+                               text-gold
+                               focus:ring-0
+                               bg-transparent">
+
+                    <span>Remember me</span>
+
+                </label>
+
+
+                <a
+                    href="#"
+                    class="text-[18px] text-gold
+                           hover:text-yellow-300
+                           transition">
+
+                    Forgot your password?
+
+                </a>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+            <button
+                type="submit"
+                class="gold-button w-full h-[90px]
+                       rounded-[11px]
+                       mt-10
+                       text-black
+                       font-semibold
+                       text-[27px]
+                       tracking-wide
+                       flex items-center
+                       justify-center
+                       relative
+                       transition">
+
+                <span>LOG IN</span>
+
+                <!-- ARROW -->
+                <svg
+                    class="absolute right-7 w-10 h-10"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24">
+
+                    <path d="M5 12h14"></path>
+                    <path d="M13 6l6 6-6 6"></path>
+
+                </svg>
+
+            </button>
+
+
+            <!-- OR -->
+            <div class="flex items-center gap-8 mt-10">
+
+                <div class="flex-1 h-px bg-gray-600"></div>
+
+                <span class="text-gray-400 text-[20px]">
+                    OR
+                </span>
+
+                <div class="flex-1 h-px bg-gray-600"></div>
+
+            </div>
+
+
+            <!-- CONTACT -->
+            <div class="text-center mt-9 text-[19px] text-gray-300">
+
+                Don't have an account?
+
+                <a
+                    href="#"
+                    class="text-gold hover:text-yellow-300
+                           transition">
+
+                    Contact Administrator
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function togglePassword() {
+
+    const password = document.getElementById('password');
+
+    if (password.type === 'password') {
+        password.type = 'text';
+    } else {
+        password.type = 'password';
+    }
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THE 900 · General Information</title>
+  <!-- Tailwind (latest) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cormorant Garamond + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <style>
+    /* minimal custom overrides – everything else uses Tailwind utility classes */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #050505;
+      font-family: 'Inter', sans-serif;
+      color: #FFFFFF;
+      scroll-behavior: smooth;
+    }
+    .font-cormorant { font-family: 'Cormorant Garamond', serif; }
+    /* gold-text, gold-border, gold-bg are kept as shortcuts, but we also use tailwind classes */
+    .gold-text { color: #D4AF37; }
+    .gold-border { border-color: rgba(212, 175, 55, 0.25); }
+    .gold-bg { background-color: #D4AF37; }
+
+    /* glass-card with tailwind border/background but we keep the hover effect */
+    .glass-card {
+      background: #111111;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 22px;
+      backdrop-filter: blur(2px);
+      transition: all 0.3s ease;
+    }
+    .glass-card:hover {
+      border-color: #D4AF37;
+      box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08);
+      transform: translateY(-6px);
+    }
+    .gold-circle-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #D4AF37;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+    .glass-card:hover .gold-circle-icon {
+      background: rgba(212, 175, 55, 0.05);
+      border-color: #D4AF37;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+    }
+    .luxury-divider {
+      height: 1px;
+      width: 70px;
+      background: rgba(212, 175, 55, 0.35);
+      margin: 1rem 0;
+    }
+    .gold-outline-btn {
+      background: transparent;
+      border: 1px solid #D4AF37;
+      color: #D4AF37;
+      padding: 0.7rem 2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+    }
+    .gold-outline-btn:hover {
+      background: #D4AF37;
+      color: #050505;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+    }
+    .sticky-nav {
+      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 5, 0.6);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+    }
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.65);
+    }
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .fade-up:nth-child(3) { transition-delay: 0.2s; }
+    .fade-up:nth-child(4) { transition-delay: 0.3s; }
+    .skyline-svg {
+      opacity: 0.35;
+      max-width: 140px;
+    }
+    .marble-bg {
+      background: #0E0E0E;
+      background-image: radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.02) 0%, transparent 70%);
+    }
+    .footer-divider {
+      height: 1px;
+      background: rgba(212, 175, 55, 0.2);
+      width: 100%;
+      margin: 2rem 0;
+    }
+    @media (max-width: 768px) {
+      .hero-section { height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV (sticky) – using Tailwind classes for layout ===== -->
+  <header class="fixed top-0 left-0 w-full z-50 sticky-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+      <!-- left logo -->
+      <div class="flex items-center gap-2">
+        <img src="/assets/images/logo-white.svg" alt="The 900" class="h-8 w-auto" onerror="this.style.display='none'" />
+        <span class="font-cormorant text-2xl tracking-widest text-white font-light">THE 900</span>
+      </div>
+      <!-- nav (desktop) -->
+      <nav class="hidden lg:flex items-center gap-8 text-sm text-white/80 font-light tracking-wide">
+        <a href="#" class="hover:text-[#D4AF37] transition">Home</a>
+        <a href="#" class="hover:text-[#D4AF37] transition">Floor Plans</a>
+        <a href="#" class="hover:text-[#D4AF37] transition">Amenities</a>
+        <a href="#" class="hover:text-[#D4AF37] transition">Neighborhood</a>
+        <a href="#" class="hover:text-[#D4AF37] transition">Gallery</a>
+        <a href="#" class="hover:text-[#D4AF37] transition">Contact</a>
+      </nav>
+      <!-- right btn -->
+      <div>
+        <a href="#" class="gold-outline-btn text-sm px-6 py-2.5">Apply Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero-section relative w-full h-[70vh] min-h-[500px] flex items-center overflow-hidden" style="background: url('/assets/images/general-information-hero.jpg') center center / cover no-repeat;">
+    <div class="absolute inset-0 hero-overlay"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="max-w-3xl">
+        <span class="text-[#D4AF37] text-sm tracking-[0.25em] font-medium uppercase">General</span>
+        <h1 class="font-cormorant text-5xl sm:text-6xl md:text-7xl font-light text-white leading-[1.1] mt-1">INFORMATION</h1>
+        <div class="luxury-divider my-5"></div>
+        <p class="text-[#BFBFBF] text-base sm:text-lg max-w-xl font-light leading-relaxed">
+          Everything you need to know about leasing, deposits, pet policies, application fees and resident services.
+        </p>
+        <div class="mt-8 flex items-center gap-3">
+          <span class="w-8 h-[1px] bg-[#D4AF37]/40"></span>
+          <span class="w-2 h-2 rounded-full bg-[#D4AF37]/30"></span>
+          <span class="w-8 h-[1px] bg-[#D4AF37]/40"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4 CARDS – using Tailwind for spacing, border, bg, text ===== -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- card 1 : leasing -->
+      <div class="glass-card p-8 fade-up">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="gold-circle-icon"><i class="fas fa-building"></i></span>
+          <h3 class="font-cormorant text-2xl font-light tracking-wide text-white">Leasing Office</h3>
+        </div>
+        <div class="space-y-2 text-[#BFBFBF] text-sm font-light">
+          <p><span class="text-white/60 text-xs uppercase tracking-wider">Phone</span><br /><span class="text-base text-white/90">213-900-0900</span></p>
+          <p><span class="text-white/60 text-xs uppercase tracking-wider">Email</span><br /><span class="text-base text-[#D4AF37]">leasing@the900apts.com</span></p>
+        </div>
+      </div>
+
+      <!-- card 2 : fees -->
+      <div class="glass-card p-8 fade-up">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="gold-circle-icon"><i class="fas fa-wallet"></i></span>
+          <h3 class="font-cormorant text-2xl font-light tracking-wide text-white">General Fees</h3>
+        </div>
+        <div class="space-y-4 text-[#BFBFBF] text-sm">
+          <div>
+            <span class="text-white/70 text-xs uppercase tracking-wider">Deposit</span>
+            <p class="text-base text-white/90 font-light">Equal to one month rent</p>
+            <p class="text-[10px] text-white/40 italic mt-0.5">(On approved credit. Certain terms and conditions may apply. Subject to change.)</p>
+          </div>
+          <div class="w-full h-[1px] bg-[rgba(212,175,55,0.15)] my-3"></div>
+          <div>
+            <span class="text-white/70 text-xs uppercase tracking-wider">Application</span>
+            <p class="text-base text-white/90 font-light">$48 per adult applicant.SUBJECT TO CHANGE.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- card 3 : pets -->
+      <div class="glass-card p-8 fade-up">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="gold-circle-icon"><i class="fas fa-paw"></i></span>
+          <h3 class="font-cormorant text-2xl font-light tracking-wide text-white">Pet Information</h3>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-sm text-[#BFBFBF]">
+          <div><span class="text-white/60 text-xs uppercase tracking-wider">Max Pets (PER APARTMENT)</span><p class="text-base text-white/90">2</p></div>
+          <div><span class="text-white/60 text-xs uppercase tracking-wider">Max Weight (PER PET)</span><p class="text-base text-white/90">35 lbs</p></div>
+          <div><span class="text-white/60 text-xs uppercase tracking-wider">Monthly Rent (PER PET)</span><p class="text-base text-white/90">$50</p></div>
+          <div><span class="text-white/60 text-xs uppercase tracking-wider">Deposit (PER PET; REFUNDABLE)</span><p class="text-base text-white/90">$500 Refundable</p></div>
+        </div>
+        <p class="text-[#BFBFBF]/60 text-[11px] mt-4 italic">Please contact the leasing office for more details.</p>
+      </div>
+
+      <!-- card 4 : specials -->
+      <div class="glass-card p-8 fade-up relative overflow-hidden">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="gold-circle-icon"><i class="fas fa-tag"></i></span>
+          <h3 class="font-cormorant text-2xl font-light tracking-wide text-white">Specials</h3>
+        </div>
+        <div class="space-y-2 text-[#BFBFBF] text-sm">
+          <p>Email <span class="text-[#D4AF37]">leasing@the900apts.com</span> or call</p>
+          <p class="text-white/90 text-base">213-900-0900</p>
+          <p class="text-xs text-white/50">for current leasing specials.</p>
+        </div>
+        <div class="absolute -bottom-4 -right-2 opacity-20 pointer-events-none">
+          <img src="/assets/images/gold-city-outline.png" alt="skyline" class="skyline-svg" onerror="this.style.display='none'" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== RESIDENT PORTAL – using Tailwind classes ===== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    <div class="marble-bg glass-card border-[rgba(212,175,55,0.25)] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 transition-all hover:border-[#D4AF37] duration-500">
+      <div class="flex items-start gap-5 w-full md:w-auto">
+        <span class="gold-circle-icon w-14 h-14 text-2xl flex-shrink-0"><i class="fas fa-desktop"></i></span>
+        <div>
+          <h4 class="font-cormorant text-3xl font-light text-white">Resident Portal</h4>
+          <p class="text-[#BFBFBF] text-sm max-w-md font-light mt-1">Access the resident portal below to submit online payments and maintenance requests.</p>
+        </div>
+      </div>
+      <div class="flex-shrink-0">
+        <a href="#" class="gold-outline-btn text-sm px-8 py-3">Visit Resident Portal</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER – using Tailwind border, bg, text, flex ===== -->
+  <footer class="bg-[#050505] border-t border-[rgba(212,175,55,0.08)] px-4 sm:px-6 lg:px-8 py-10">
+    <div class="max-w-7xl mx-auto">
+      <div class="footer-divider"></div>
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-3">
+          <img src="/assets/images/logo-white.svg" alt="The 900" class="h-6 w-auto" onerror="this.style.display='none'" />
+          <span class="font-cormorant text-xl tracking-widest text-white/80 font-light">THE 900</span>
+        </div>
+        <div class="text-center md:text-left">
+          <p class="text-white/70 text-sm font-light tracking-wide">900 S Vermont Ave, Los Angeles, CA 90006</p>
+        </div>
+        <div class="flex items-center gap-6 text-white/50 text-sm">
+          <a href="#" class="hover:text-[#D4AF37] transition"><i class="fab fa-instagram mr-1"></i> Instagram</a>
+          <a href="#" class="hover:text-[#D4AF37] transition"><i class="fab fa-facebook mr-1"></i> Facebook</a>
+          <a href="#" class="hover:text-[#D4AF37] transition">Home</a>
+        </div>
+      </div>
+      <div class="footer-divider mt-6"></div>
+      <p class="text-[#BFBFBF]/30 text-[10px] text-center tracking-widest uppercase mt-4">© 2026 THE 900 — LUXURY RESIDENCES</p>
+    </div>
+  </footer>
+
+  <!-- ===== JS ===== -->
+  <script>
+    (function(){
+      // fade-up
+      const fadeEls = document.querySelectorAll('.fade-up');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('show');
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+      fadeEls.forEach(el => observer.observe(el));
+
+      // smooth anchors
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href && href !== "#" && href !== "#!") {
+            const target = document.querySelector(href);
+            if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+          }
+        });
+      });
+
+      // sticky nav shadow
+      const nav = document.querySelector('.sticky-nav');
+      window.addEventListener('scroll', () => {
+        nav.style.boxShadow = window.scrollY > 10 ? '0 4px 40px rgba(0,0,0,0.5)' : 'none';
+      });
+    })();
+  </script>
+</body>
+</html>

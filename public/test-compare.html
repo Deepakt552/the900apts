@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head><title>Exact Fit Finder</title></head>
+<body>
+<div id="output" style="font-family: monospace; font-size: 14px; white-space: pre;">Fitting...</div>
+<canvas id="cv" style="border:1px solid red; display:block; margin-top:10px;"></canvas>
+<script>
+async function run() {
+  const loadImg = src => new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+
+  const [bg, bldg, comp] = await Promise.all([
+    loadImg('./Home/bg01.webp'),
+    loadImg('./Home/buidng01.webp'),
+    loadImg('./Home/new%20hero%20bg.webp')
+  ]);
+
+  // Reference canvas size is composite: 1942 x 809
+  const W = comp.naturalWidth;
+  const H = comp.naturalHeight;
+  const cv = document.getElementById('cv');
+  cv.width = W;
+  cv.height = H;
+  const ctx = cv.getContext('2d');
+
+  // Let's test placing bg01 and buidng01 onto the 1942x809 canvas
+  // We want to find (bgX, bgY, bgW, bgH) and (bldgX, bldgY, bldgW, bldgH)
+  // that minimize difference to comp
+  
+  // Notice: bg01 naturalWidth=1959, naturalHeight=803
+  // comp naturalWidth=1942, naturalHeight=809
+  // buidng01 naturalWidth=1928, naturalHeight=816
+  
+  // Let's test if bg01 is simply comp with a few pixels margin or 1:1 offset:
+  // comp vs bg01:
+  // Earlier: offset (comp - bg01) dx = -1, dy = 6
+  // That means pixel (x, y) in bg01 corresponds to (x - 1, y + 6) in comp!
+  // And for bldg:
+  // offset (comp - bldg) dx = 2, dy = -2
+  // That means pixel (x, y) in bldg corresponds to (x + 2, y - 2) in comp!
+
+  // Let's verify by drawing bldg at (2, -2) and bg01 at (-1, 6) onto the canvas:
+  ctx.clearRect(0, 0, W, H);
+  ctx.drawImage(bldg, 2, -2);
+  ctx.drawImage(bg01, -1, 6);
+
+  // Now compare to comp:
+  const compCtx = document.createElement('canvas').getContext('2d');
+  compCtx.canvas.width = W;
+  compCtx.canvas.height = H;
+  compCtx.drawImage(comp, 0, 0);
+  const compData = compCtx.getImageData(0, 0, W, H).data;
+  const testData = ctx.getImageData(0, 0, W, H).data;
+
+  let totalDiff = 0, testedPixels = 0;
+  for (let i = 0; i < compData.length; i += 4) {
+    // only test if testData is opaque
+    if (testData[i+3] > 200 && compData[i+3] > 200) {
+      const diff = Math.abs(testData[i] - compData[i]) +
+                   Math.abs(testData[i+1] - compData[i+1]) +
+                   Math.abs(testData[i+2] - compData[i+2]);
+      totalDiff += diff;
+      testedPixels++;
+    }
+  }
+
+  const avgDiff = totalDiff / (testedPixels * 3);
+  document.getElementById('output').textContent = 
+    `Verification:\n` +
+    `Tested pixels: ${testedPixels}\n` +
+    `Average color difference per channel: ${avgDiff.toFixed(2)} / 255\n` +
+    `bldg drawn at: x=2, y=-2 (size ${bldg.naturalWidth} x ${bldg.naturalHeight})\n` +
+    `bg01 drawn at: x=-1, y=6 (size ${bg.naturalWidth} x ${bg.naturalHeight})\n` +
+    `Canvas size: ${W} x ${H}`;
+}
+run();
+</script>
+</body>
+</html>

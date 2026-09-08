@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxury Residences · Contact</title>
+  <!-- Tailwind via CDN + custom config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Figtree', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdf6e3',
+              100: '#fce8b3',
+              200: '#f5dfa3',
+              300: '#e6ca85',
+              400: '#d4af37',
+              500: '#c5a059',
+              600: '#b38e45',
+              700: '#a2803b',
+              800: '#8a6d2e',
+              900: '#6d5522',
+            },
+            dark: {
+              50: '#1c2840',
+              100: '#2a3b5a',
+              200: '#485c7b',
+              300: '#0b0f19',
+              400: '#090c14',
+              500: '#111726',
+              600: '#04060b',
+              700: '#0f1726',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts: Cormorant Garamond + Figtree -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* Minimal custom CSS - only animations and scrollbar */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    /* Font families */
+    h1, h2, h3, h4, .serif {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+    }
+    
+    /* Animations */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-item { transition-delay: 0.1s; }
+    .stagger-item:nth-child(2) { transition-delay: 0.2s; }
+    .stagger-item:nth-child(3) { transition-delay: 0.3s; }
+    .stagger-item:nth-child(4) { transition-delay: 0.4s; }
+    
+    .parallax { background-attachment: fixed; background-size: cover; background-position: center; }
+    @media (max-width: 768px) { .parallax { background-attachment: scroll; } }
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 6px; background: #0b0f19; }
+    ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 12px; }
+    
+    /* FAQ toggle */
+    .faq-toggle { transition: transform 0.25s ease; }
+    .faq-toggle.open { transform: rotate(45deg); }
+    
+    /* Focus ring - using Tailwind's ring classes instead */
+    /* All focus styles now use focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400 */
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 flex items-center justify-between bg-transparent">
+  <div class="text-2xl serif tracking-widest text-gold-400"><i class="fas fa-building me-2"></i>THE 900</div>
+  <div class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-wider">
+    <a href="#" class="hover:text-gold-400 transition">Floor Plans</a>
+    <a href="#" class="hover:text-gold-400 transition">Amenities</a>
+    <a href="#" class="hover:text-gold-400 transition">Gallery</a>
+    <a href="#" class="hover:text-gold-400 transition">Neighborhood</a>
+    <a href="#" class="text-gold-400 border-b-2 border-gold-400 pb-1">Contact</a>
+  </div>
+  <div class="hidden md:block">
+    <a href="#" class="border border-gold-400 text-white bg-transparent hover:bg-gold-400/10 hover:border-gold-300 transition px-6 py-2.5 rounded-full text-sm"><i class="fas fa-calendar-check me-2"></i>Schedule a Tour</a>
+  </div>
+  <!-- mobile hamburger -->
+  <button id="hamburger" class="md:hidden flex flex-col space-y-1.5 p-2" aria-label="Menu">
+    <span class="block w-6 h-0.5 bg-white"></span>
+    <span class="block w-6 h-0.5 bg-white"></span>
+    <span class="block w-6 h-0.5 bg-white"></span>
+  </button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="relative h-screen flex items-center overflow-hidden bg-gradient-to-br from-dark-400 to-dark-50">
+  <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80')] bg-cover bg-center opacity-30"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-dark-400 via-dark-400/70 to-transparent"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-12 w-full">
+    <div class="max-w-2xl fade-up visible">
+      <span class="text-gold-400 text-xs tracking-[0.3em] uppercase font-medium"><i class="fas fa-phone-alt me-2"></i>Contact Us</span>
+      <h1 class="text-5xl md:text-7xl font-bold serif leading-[1.1] mt-4">Let's Find Your<br/>Perfect Home</h1>
+      <p class="text-gray-400 text-lg mt-6 max-w-lg">Experience elevated living with concierge service, panoramic views, and timeless design.</p>
+      <a href="#" class="inline-block bg-gold-400 text-dark-400 font-semibold hover:bg-gold-500 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(212,175,55,0.3)] transition-all px-10 py-3 rounded-full mt-8"><i class="fas fa-arrow-right me-2"></i>Inquire Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT CARDS ===== -->
+<section class="py-20 bg-dark-300">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="bg-dark-500 p-8 rounded-2xl border border-dark-100 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:border-gold-400 transition-all fade-up stagger-item">
+      <div class="w-12 h-12 rounded-full border-2 border-gold-400 flex items-center justify-center text-gold-400 text-xl flex-shrink-0"><i class="fas fa-building"></i></div>
+      <h4 class="text-lg serif mt-4">Leasing Office</h4>
+      <p class="text-gray-400 text-sm mt-1">900 Luxury Ave, Suite 1A</p>
+      <hr class="my-4 border-dark-100 w-12 border-gold-400"/>
+      <p class="text-xs text-gray-400"><i class="far fa-clock me-1"></i> Mon–Sat 9AM – 7PM</p>
+    </div>
+    <div class="bg-dark-500 p-8 rounded-2xl border border-dark-100 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:border-gold-400 transition-all fade-up stagger-item">
+      <div class="w-12 h-12 rounded-full border-2 border-gold-400 flex items-center justify-center text-gold-400 text-xl flex-shrink-0"><i class="fas fa-phone-alt"></i></div>
+      <h4 class="text-lg serif mt-4">Phone</h4>
+      <p class="text-gray-400 text-sm mt-1">(213) 900-0900</p>
+      <hr class="my-4 border-dark-100 w-12 border-gold-400"/>
+      <p class="text-xs text-gray-400"><i class="fas fa-headset me-1"></i> 24/7 concierge</p>
+    </div>
+    <div class="bg-dark-500 p-8 rounded-2xl border border-dark-100 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:border-gold-400 transition-all fade-up stagger-item">
+      <div class="w-12 h-12 rounded-full border-2 border-gold-400 flex items-center justify-center text-gold-400 text-xl flex-shrink-0"><i class="fas fa-envelope"></i></div>
+      <h4 class="text-lg serif mt-4">Email</h4>
+      <p class="text-gray-400 text-sm mt-1">residences@the900.com</p>
+      <hr class="my-4 border-dark-100 w-12 border-gold-400"/>
+      <p class="text-xs text-gray-400"><i class="fas fa-reply-all me-1"></i> Response within 2h</p>
+    </div>
+    <div class="bg-dark-500 p-8 rounded-2xl border border-dark-100 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:border-gold-400 transition-all fade-up stagger-item">
+      <div class="w-12 h-12 rounded-full border-2 border-gold-400 flex items-center justify-center text-gold-400 text-xl flex-shrink-0"><i class="far fa-clock"></i></div>
+      <h4 class="text-lg serif mt-4">Office Hours</h4>
+      <p class="text-gray-400 text-sm mt-1">9:00 AM – 7:00 PM</p>
+      <hr class="my-4 border-dark-100 w-12 border-gold-400"/>
+      <p class="text-xs text-gray-400"><i class="fas fa-calendar-alt me-1"></i> Sunday by appt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT FORM + IMAGE ===== -->
+<section class="py-16 bg-dark-400">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <!-- form -->
+    <div class="bg-dark-500 p-8 md:p-12 rounded-3xl border border-dark-100 fade-left">
+      <h2 class="serif text-3xl md:text-4xl"><i class="fas fa-pen-fancy text-gold-400 me-2"></i>Send Inquiry</h2>
+      <p class="text-gray-400 text-sm mt-2">Our team will respond within 2 hours.</p>
+      <form class="mt-8 space-y-5" onsubmit="event.preventDefault(); alert('Thank you! We will be in touch.');">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs uppercase tracking-wider text-gray-400 block mb-1"><i class="fas fa-user text-gold-400 me-1"></i> First Name *</label>
+            <input type="text" placeholder="First Name" required class="w-full bg-dark-50 border border-dark-100 text-white rounded-2xl px-4 py-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400" />
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-wider text-gray-400 block mb-1"><i class="fas fa-user text-gold-400 me-1"></i> Last Name *</label>
+            <input type="text" placeholder="Last Name" required class="w-full bg-dark-50 border border-dark-100 text-white rounded-2xl px-4 py-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs uppercase tracking-wider text-gray-400 block mb-1"><i class="fas fa-envelope text-gold-400 me-1"></i> Email *</label>
+            <input type="email" placeholder="Email" required class="w-full bg-dark-50 border border-dark-100 text-white rounded-2xl px-4 py-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400" />
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-wider text-gray-400 block mb-1"><i class="fas fa-phone text-gold-400 me-1"></i> Phone</label>
+            <input type="tel" placeholder="Phone" class="w-full bg-dark-50 border border-dark-100 text-white rounded-2xl px-4 py-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400" />
+          </div>
+        </div>
+        <div>
+          <label class="text-xs uppercase tracking-wider text-gray-400 block mb-1"><i class="fas fa-home text-gold-400 me-1"></i> Address</label>
+          <input type="text" placeholder="Address" class="w-full bg-dark-50 border border-dark-100 text-white rounded-2xl px-4 py-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400" />
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs uppercase tracking-wider text-gray-400 block mb-1"><i class="fas fa-city text-gold-400 me-1"></i> City</label>
+            <input type="text" placeholder="City" class="w-full bg-dark-50 border border-dark-100 text-white rounded-2xl px-4 py-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs uppercase tracking-wider text-gray-400 block mb-1"><i class="fas fa-map-pin text-gold-400 me-1"></i> State</label>
+              <input type="text" placeholder="State" class="w-full bg-dark-50 border border-dark-100 text-white rounded-2xl px-4 py-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-wider text-gray-400 block mb-1"><i class="fas fa-mail-bulk text-gold-400 me-1"></i> Zip</label>
+              <input type="text" placeholder="Zip" class="w-full bg-dark-50 border border-dark-100 text-white rounded-2xl px-4 py-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="text-xs uppercase tracking-wider text-gray-400 block mb-1"><i class="fas fa-bullhorn text-gold-400 me-1"></i> How did you hear about us?</label>
+          <select class="w-full bg-dark-50 border border-dark-100 text-gray-400 rounded-2xl px-4 py-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400">
+            <option value="">Select</option>
+            <option>Social Media</option>
+            <option>Friend / Family</option>
+            <option>Online Search</option>
+            <option>Real Estate Agent</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs uppercase tracking-wider text-gray-400 block mb-1"><i class="fas fa-comment text-gold-400 me-1"></i> Leave Us a Message:</label>
+          <textarea rows="3" placeholder="Your message..." class="w-full bg-dark-50 border border-dark-100 text-white rounded-2xl px-4 py-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400/15 focus:border-gold-400"></textarea>
+        </div>
+        <button type="submit" class="bg-gold-400 text-dark-400 font-semibold hover:bg-gold-500 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(212,175,55,0.3)] transition-all px-10 py-3.5 rounded-full w-full md:w-auto text-sm tracking-wider"><i class="fas fa-paper-plane me-2"></i>Send Inquiry</button>
+      </form>
+    </div>
+    <!-- image -->
+    <div class="rounded-3xl overflow-hidden shadow-2xl hover:scale-[1.01] transition duration-700 fade-right min-h-[380px] max-h-[480px]">
+      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Luxury lobby" class="w-full h-full object-cover" />
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEIGHBORHOOD MAP ===== -->
+<section class="py-20 bg-dark-300 relative">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      <div class="lg:col-span-1 bg-dark-500 p-8 rounded-3xl border border-dark-100 shadow-xl fade-left">
+        <h3 class="serif text-2xl text-gold-400"><i class="fas fa-map-marker-alt me-2"></i>Leasing Office</h3>
+        <p class="text-gray-400 text-sm mt-1">900 Luxury Ave, Los Angeles, CA 90001</p>
+        <ul class="mt-4 space-y-2 text-sm text-gray-400">
+          <li class="flex items-center gap-3"><span class="text-gold-400"><i class="fas fa-check-circle"></i></span> Parking Available</li>
+          <li class="flex items-center gap-3"><span class="text-gold-400"><i class="fas fa-check-circle"></i></span> Public Transit Nearby</li>
+          <li class="flex items-center gap-3"><span class="text-gold-400"><i class="fas fa-check-circle"></i></span> Easy Metro Access</li>
+        </ul>
+        <a href="#" class="inline-block mt-6 border border-gold-400 text-white bg-transparent hover:bg-gold-400/10 hover:border-gold-300 transition px-8 py-2.5 rounded-full text-sm"><i class="fas fa-directions me-2"></i>Get Directions</a>
+      </div>
+      <div class="lg:col-span-2 rounded-3xl overflow-hidden border border-dark-100 relative h-72 lg:h-auto min-h-[280px] lg:min-h-[320px] fade-right">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.908419430063!2d-118.29399968478474!3d34.0608000806126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c7f0b2f7b4c3%3A0x3f8b0b0c0b0b0b0b!2sLos%20Angeles%2C%20CA!5e0!3m2!1sen!2sus!4v1617182736451!5m2!1sen!2sus" 
+          allowfullscreen="" 
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="w-full h-full min-h-[280px] lg:min-h-[320px] border-0"
+          style="filter: invert(90%) hue-rotate(180deg) brightness(0.85);"
+        ></iframe>
+        <div class="absolute bottom-6 left-6 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-400/40 text-xs text-gold-400">
+          <i class="fas fa-star text-gold-400 me-1"></i> premium location
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE BANNER ===== -->
+<section class="relative py-28 overflow-hidden parallax" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1600&q=80');">
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="relative z-10 max-w-4xl mx-auto text-center px-6 fade-up">
+    <h2 class="serif text-5xl md:text-7xl font-bold"><i class="fas fa-crown text-gold-400 me-3"></i>Experience The Lifestyle In Person</h2>
+    <p class="text-gray-400 text-lg mt-4 max-w-2xl mx-auto">Join us for a private tour and discover why The 900 is the pinnacle of urban luxury.</p>
+    <a href="#" class="inline-block bg-gold-400 text-dark-400 font-semibold hover:bg-gold-500 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(212,175,55,0.3)] transition-all px-10 py-3.5 rounded-full mt-8"><i class="fas fa-calendar-check me-2"></i>Book Your Visit</a>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="py-20 bg-dark-400">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <div class="fade-left">
+      <span class="text-gold-400 text-xs tracking-[0.2em] uppercase"><i class="fas fa-question-circle me-1"></i>Insights</span>
+      <h2 class="serif text-5xl font-bold mt-2">Frequently Asked Questions</h2>
+      <div class="mt-8 rounded-3xl overflow-hidden border border-dark-100">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80" alt="luxury vase" class="w-full h-56 object-cover" />
+      </div>
+    </div>
+    <div class="fade-right space-y-1">
+      <div class="border-b border-dark-100 py-5 last:border-b-0">
+        <button class="flex justify-between items-center w-full text-left text-base font-medium group" onclick="toggleFaq(this)">
+          <span><i class="fas fa-calendar text-gold-400 me-2"></i>How do I schedule a tour?</span>
+          <span class="faq-toggle text-2xl text-gold-400">+</span>
+        </button>
+        <div class="faq-answer text-gray-400 text-sm mt-2 max-h-0 overflow-hidden transition-all duration-300">Contact our leasing office via phone or email, or book instantly through our website.</div>
+      </div>
+      <div class="border-b border-dark-100 py-5 last:border-b-0">
+        <button class="flex justify-between items-center w-full text-left text-base font-medium group" onclick="toggleFaq(this)">
+          <span><i class="fas fa-file-signature text-gold-400 me-2"></i>What lease terms are available?</span>
+          <span class="faq-toggle text-2xl text-gold-400">+</span>
+        </button>
+        <div class="faq-answer text-gray-400 text-sm mt-2 max-h-0 overflow-hidden transition-all duration-300">We offer 6, 12, and 24-month leases with flexible renewal options.</div>
+      </div>
+      <div class="border-b border-dark-100 py-5 last:border-b-0">
+        <button class="flex justify-between items-center w-full text-left text-base font-medium group" onclick="toggleFaq(this)">
+          <span><i class="fas fa-paw text-gold-400 me-2"></i>Are pets allowed?</span>
+          <span class="faq-toggle text-2xl text-gold-400">+</span>
+        </button>
+        <div class="faq-answer text-gray-400 text-sm mt-2 max-h-0 overflow-hidden transition-all duration-300">Yes, we are pet‑friendly with a two‑pet limit and breed restrictions apply.</div>
+      </div>
+      <div class="border-b border-dark-100 py-5 last:border-b-0">
+        <button class="flex justify-between items-center w-full text-left text-base font-medium group" onclick="toggleFaq(this)">
+          <span><i class="fas fa-water text-gold-400 me-2"></i>What utilities are included?</span>
+          <span class="faq-toggle text-2xl text-gold-400">+</span>
+        </button>
+        <div class="faq-answer text-gray-400 text-sm mt-2 max-h-0 overflow-hidden transition-all duration-300">Water, trash, and high‑speed internet are included. Electricity and gas are metered separately.</div>
+      </div>
+      <div class="border-b border-dark-100 py-5 last:border-b-0">
+        <button class="flex justify-between items-center w-full text-left text-base font-medium group" onclick="toggleFaq(this)">
+          <span><i class="fas fa-car text-gold-400 me-2"></i>Is parking available?</span>
+          <span class="faq-toggle text-2xl text-gold-400">+</span>
+        </button>
+        <div class="faq-answer text-gray-400 text-sm mt-2 max-h-0 overflow-hidden transition-all duration-300">Yes, secure underground parking with EV charging stations is available for residents.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER CTA ===== -->
+<footer class="relative py-20 bg-dark-600 border-t border-dark-100">
+  <div class="absolute inset-0 opacity-10" style="background: radial-gradient(circle at 30% 50%, #d4af37, transparent 70%);"></div>
+  <div class="relative max-w-6xl mx-auto px-6 text-center fade-up">
+    <h2 class="serif text-5xl md:text-7xl font-bold"><i class="fas fa-home text-gold-400 me-3"></i>Your New Home Awaits</h2>
+    <p class="text-gray-400 text-lg mt-4">Schedule a private tour or speak with our leasing team today.</p>
+    <div class="flex flex-wrap justify-center gap-4 mt-10">
+      <a href="#" class="bg-gold-400 text-dark-400 font-semibold hover:bg-gold-500 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(212,175,55,0.3)] transition-all px-12 py-3.5 rounded-full"><i class="fas fa-calendar-check me-2"></i>Schedule a Tour</a>
+      <a href="#" class="border border-gold-400 text-white bg-transparent hover:bg-gold-400/10 hover:border-gold-300 transition px-12 py-3.5 rounded-full"><i class="fas fa-phone-alt me-2"></i>Call (213) 900-0900</a>
+    </div>
+    <div class="mt-16 text-xs text-gray-400 tracking-widest flex justify-center gap-8 flex-wrap">
+      <span class="text-gold-400"><i class="fas fa-building me-1"></i>THE 900</span>
+      <span>© 2026 · Luxury Residences</span>
+      <span><i class="fas fa-lock me-1"></i>Privacy · Terms</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      navbar.classList.add('bg-dark-400', 'backdrop-blur-md', 'border-b', 'border-dark-100', 'py-2');
+    } else {
+      navbar.classList.remove('bg-dark-400', 'backdrop-blur-md', 'border-b', 'border-dark-100', 'py-2');
+    }
+  });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.hidden.md\\:flex');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('hidden');
+    navLinks.classList.toggle('flex');
+    navLinks.classList.toggle('flex-col');
+    navLinks.classList.toggle('absolute');
+    navLinks.classList.toggle('top-16');
+    navLinks.classList.toggle('left-0');
+    navLinks.classList.toggle('w-full');
+    navLinks.classList.toggle('bg-dark-400');
+    navLinks.classList.toggle('p-6');
+    navLinks.classList.toggle('space-x-0');
+    navLinks.classList.toggle('space-y-4');
+    navLinks.classList.toggle('border-b');
+    navLinks.classList.toggle('border-dark-100');
+  });
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const icon = btn.querySelector('.faq-toggle');
+    const isOpen = icon.classList.contains('open');
+    document.querySelectorAll('.faq-answer').forEach(el => { el.style.maxHeight = '0'; });
+    document.querySelectorAll('.faq-toggle').forEach(el => el.classList.remove('open'));
+    if (!isOpen) {
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      icon.classList.add('open');
+    }
+  }
+
+  // Intersection Observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-up.visible').forEach(el => el.classList.add('visible'));
+
+  // fix mobile nav on resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      navLinks.classList.remove('hidden', 'flex-col', 'absolute', 'top-16', 'left-0', 'w-full', 'bg-dark-400', 'p-6', 'space-x-0', 'space-y-4', 'border-b', 'border-dark-100');
+      navLinks.classList.add('flex', 'space-x-8');
+    }
+  });
+</script>
+</body>
+</html>

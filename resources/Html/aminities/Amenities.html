@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxury Residences · Amenities</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              50: '#fdf6e3',
+              100: '#fce8b3',
+              200: '#f5dfa3',
+              300: '#e6ca85',
+              400: '#d4af37',
+              500: '#c5a059',
+              600: '#b38e45',
+              700: '#a2803b',
+              800: '#8a6d2e',
+              900: '#6d5522',
+            },
+            dark: {
+              50: '#1c2840',
+              100: '#2a3b5a',
+              200: '#485c7b',
+              300: '#0b0f19',
+              400: '#090c14',
+              500: '#111726',
+              600: '#04060b',
+              700: '#0f1726',
+            }
+          },
+          fontFamily: {
+            cormorant: ['Cormorant Garamond', 'serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
+            playfair: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* minimal custom styles for animations & subtle overrides */
+    .bounce-arrow {
+      animation: bounce 2.2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(12px); }
+    }
+    .btn-gold {
+      border: 1.5px solid #d4af37;
+      color: #fdf6e3;
+      background: transparent;
+      transition: all 0.4s ease;
+    }
+    .btn-gold:hover {
+      background: #d4af37;
+      color: #0b0f19;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25);
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.08);
+    }
+    .card-hover:hover {
+      background: #1c2840;
+      transform: translateY(-6px);
+      border-color: rgba(212, 175, 55, 0.25);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+    .amenity-hover {
+      transition: all 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.06);
+    }
+    .amenity-hover:hover {
+      background: #1c2840;
+      transform: translateY(-4px);
+      border-color: rgba(212, 175, 55, 0.2);
+    }
+    .img-overlay {
+      position: relative;
+    }
+    .img-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 15, 25, 0.3);
+      border-radius: inherit;
+    }
+    .img-overlay > * {
+      position: relative;
+      z-index: 2;
+    }
+    .gold-divider {
+      width: 70px;
+      height: 2.5px;
+      background: #d4af37;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="bg-dark-300 text-gold-50 font-montserrat">
+
+<!-- ===== HERO ===== -->
+<section class="min-h-screen flex items-center justify-center text-center relative px-6 py-16 border-b border-dark-100 bg-gradient-to-br from-dark-300 to-dark-50 overflow-hidden">
+  <!-- decorative bg -->
+  <div class="absolute inset-0 opacity-60 pointer-events-none bg-cover bg-center bg-no-repeat" style="background-image: url('./AmentiesHero.png'); "></div>
+  <div class="relative z-10 max-w-3xl px-4">
+    <div class="font-cormorant text-xl md:text-2xl tracking-[0.4em] uppercase text-gold-300 border-t-2 border-gold-400 inline-block pt-3 px-2">The Essentials</div>
+    <h1 class="font-playfair font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.1] text-gold-50 mt-2 drop-shadow-[0_4px_30px_rgba(0,0,0,0.7)]">
+      Made <span class="text-gold-400 drop-shadow-[0_0_40px_rgba(212,175,55,0.15)]">Exceptional</span>
+    </h1>
+    <p class="max-w-xl mx-auto mt-8 text-lg font-light text-gold-50/90 leading-relaxed px-2">Luxury introductory text describing lifestyle and amenities. Elevated living, curated for the discerning.</p>
+    <div class="mt-12 flex flex-col items-center gap-2 text-gold-400 text-xs tracking-[0.25em] uppercase opacity-80">
+      <i class="fas fa-chevron-down text-2xl bounce-arrow"></i>
+      <span>scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INTRODUCTION (split) ===== -->
+<div class="max-w-7xl mx-auto px-3 md:px-4 py-2">
+  <div class="grid md:grid-cols-2 bg-dark-500  overflow-hidden border border-dark-100 rounded-2xl">
+    <div class="img-overlay rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none min-h-[320px] md:min-h-[440px] flex items-center justify-center text-2xl font-playfair italic text-gold-50 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&h=700&fit=crop&crop=center&auto=format');">
+      <i class="fas fa-image text-3xl mr-3 drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]"></i>
+      <span class="drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">Lifestyle</span>
+    </div>
+    <div class="bg-dark-300 p-8 md:p-14 flex flex-col justify-center rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none">
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold leading-tight">Luxury Living <br /><span class="text-gold-400 font-normal">Designed Around You</span></h2>
+      <div class="gold-divider my-4"></div>
+      <p class="text-gold-300 font-light text-lg max-w-[90%] leading-relaxed">The amenities are thoughtfully designed to complement modern lifestyles. Every detail curated for comfort, convenience, and elegance.</p>
+      <a href="#" class="btn-gold inline-block px-8 py-3.5 text-xs font-medium tracking-[0.15em] uppercase rounded mt-6 w-fit">Explore Amenities →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FEATURE HIGHLIGHTS (3 cards) ===== -->
+<div class="max-w-7xl mx-auto px-3 md:px-4 py-8 md:py-12">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div class="card-hover bg-dark-500 p-10 md:p-12 text-center rounded-2xl shadow-xl cursor-pointer">
+      <span class="text-gold-400 text-5xl block mb-4"><i class="fas fa-umbrella-beach"></i></span>
+      <h3 class="font-cormorant text-3xl font-semibold">Roof Deck</h3>
+      <p class="text-gold-300 font-light mt-2 mb-4 text-sm leading-relaxed">Panoramic views, lounge seating, and outdoor kitchen.</p>
+      <a href="#" class="text-gold-400 font-medium text-xs tracking-wider border-b border-transparent hover:border-gold-400 hover:text-gold-50 transition pb-1">→ Learn More</a>
+    </div>
+    <div class="card-hover bg-dark-500 p-10 md:p-12 text-center rounded-2xl shadow-xl cursor-pointer">
+      <span class="text-gold-400 text-5xl block mb-4"><i class="fas fa-couch"></i></span>
+      <h3 class="font-cormorant text-3xl font-semibold">Clubroom</h3>
+      <p class="text-gold-300 font-light mt-2 mb-4 text-sm leading-relaxed">Entertainers' space with wet bar and fireplace.</p>
+      <a href="#" class="text-gold-400 font-medium text-xs tracking-wider border-b border-transparent hover:border-gold-400 hover:text-gold-50 transition pb-1">→ Learn More</a>
+    </div>
+    <div class="card-hover bg-dark-500 p-10 md:p-12 text-center rounded-2xl shadow-xl cursor-pointer">
+      <span class="text-gold-400 text-5xl block mb-4"><i class="fas fa-laptop"></i></span>
+      <h3 class="font-cormorant text-3xl font-semibold">Co-working Space</h3>
+      <p class="text-gold-300 font-light mt-2 mb-4 text-sm leading-relaxed">High-speed WiFi, private pods, and conference tables.</p>
+      <a href="#" class="text-gold-400 font-medium text-xs tracking-wider border-b border-transparent hover:border-gold-400 hover:text-gold-50 transition pb-1">→ Learn More</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SPLIT SHOWCASE (work to workout) ===== -->
+<div class="max-w-7xl mx-auto px-3 md:px-4 py-0">
+  <div class="grid md:grid-cols-2 bg-dark-400 border border-dark-100 overflow-hidden rounded-2xl">
+    <div class="img-overlay rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none min-h-[340px] md:min-h-[460px] flex items-center justify-center text-2xl md:text-3xl font-playfair italic text-gold-50 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&h=700&fit=crop&crop=center&auto=format');">
+      <i class="fas fa-dumbbell text-3xl mr-4 drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]"></i>
+      <span class="drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">Wellness</span>
+    </div>
+    <div class="bg-dark-300 p-8 md:p-14 flex flex-col justify-center rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none">
+      <h2 class="font-playfair text-3xl md:text-5xl font-bold leading-tight">From Work <br /><span class="text-gold-400 font-normal">to Working Out</span></h2>
+      <p class="text-gold-300 font-light mt-3 text-lg">Seamless transition between productivity and wellness.</p>
+      <ul class="mt-4 space-y-2.5 text-gold-50 font-light">
+        <li><i class="fas fa-check text-gold-400 w-6"></i> Coworking</li>
+        <li><i class="fas fa-check text-gold-400 w-6"></i> Conference Room</li>
+        <li><i class="fas fa-check text-gold-400 w-6"></i> Zoom Booth</li>
+        <li><i class="fas fa-check text-gold-400 w-6"></i> Fitness Center</li>
+      </ul>
+      <a href="#" class="btn-gold inline-block px-8 py-3.5 text-xs font-medium tracking-[0.15em] uppercase rounded mt-6 w-fit">View Amenities →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RESIDENT AMENITIES (icon grid) ===== -->
+<div class="max-w-7xl mx-auto px-3 md:px-4 py-8 md:py-10">
+  <h2 class="text-center font-playfair text-3xl md:text-4xl text-gold-50 tracking-wide mb-6">
+    <i class="fas fa-building text-gold-400 mr-3"></i> Resident Amenities
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div class="amenity-hover bg-dark-500 p-6 text-center rounded-xl  cursor-pointer"><i class="fas fa-door-open text-3xl text-gold-400 block mb-2"></i><h4 class="font-cormorant text-xl font-semibold">Modern Lobby</h4><p class="text-gold-300 text-sm font-light">Concierge & seating</p></div>
+    <div class="amenity-hover bg-dark-500 p-6 text-center rounded-xl cursor-pointer"><i class="fas fa-users text-3xl text-gold-400 block mb-2"></i><h4 class="font-cormorant text-xl font-semibold">Clubroom</h4><p class="text-gold-300 text-sm font-light">Social lounge</p></div>
+    <div class="amenity-hover bg-dark-500 p-6 text-center rounded-xl cursor-pointer"><i class="fas fa-laptop-house text-3xl text-gold-400 block mb-2"></i><h4 class="font-cormorant text-xl font-semibold">Co-working</h4><p class="text-gold-300 text-sm font-light">Focus & connect</p></div>
+    <div class="amenity-hover bg-dark-500 p-6 text-center rounded-xl cursor-pointer"><i class="fas fa-bicycle text-3xl text-gold-400 block mb-2"></i><h4 class="font-cormorant text-xl font-semibold">Bike Storage</h4><p class="text-gold-300 text-sm font-light">Secure racks</p></div>
+    <div class="amenity-hover bg-dark-500 p-6 text-center rounded-xl cursor-pointer"><i class="fas fa-dumbbell text-3xl text-gold-400 block mb-2"></i><h4 class="font-cormorant text-xl font-semibold">Fitness Center</h4><p class="text-gold-300 text-sm font-light">Cardio & weights</p></div>
+    <div class="amenity-hover bg-dark-500 p-6 text-center rounded-xl cursor-pointer"><i class="fas fa-tree text-3xl text-gold-400 block mb-2"></i><h4 class="font-cormorant text-xl font-semibold">Roof Deck</h4><p class="text-gold-300 text-sm font-light">Skyline views</p></div>
+    <div class="amenity-hover bg-dark-500 p-6 text-center rounded-xl cursor-pointer"><i class="fas fa-envelope text-3xl text-gold-400 block mb-2"></i><h4 class="font-cormorant text-xl font-semibold">Mail & Parcel</h4><p class="text-gold-300 text-sm font-light">Package lockers</p></div>
+    <div class="amenity-hover bg-dark-500 p-6 text-center rounded-xl cursor-pointer"><i class="fas fa-wifi text-3xl text-gold-400 block mb-2"></i><h4 class="font-cormorant text-xl font-semibold">Community WiFi</h4><p class="text-gold-300 text-sm font-light">High-speed</p></div>
+  </div>
+</div>
+
+<!-- ===== FEATURE IMAGE (fitness center) ===== -->
+<div class="max-w-7xl mx-auto px-3 md:px-4">
+  <div class="relative rounded-2xl overflow-hidden bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1600&h=600&fit=crop&crop=center&auto=format');">
+    <div class="absolute inset-0 bg-dark-300/40"></div>
+    <div class="relative z-10 py-20 md:py-28 text-center">
+      <h2 class="font-playfair text-3xl md:text-5xl font-bold tracking-widest text-gold-50 drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)]">
+        <i class="fas fa-heartbeat text-gold-400 mr-3"></i> FITNESS CENTER
+      </h2>
+      <p class="text-gold-50 font-light tracking-[0.2em] mt-2 text-sm md:text-base opacity-90">Full Width Premium Photography</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HOME FEATURES (split) ===== -->
+<div class="max-w-7xl mx-auto px-3 md:px-4 py-4">
+  <div class="grid md:grid-cols-2 bg-dark-400 border border-dark-100 overflow-hidden rounded-2xl">
+    <div class="img-overlay rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none min-h-[340px] md:min-h-[520px] flex items-center justify-center text-2xl md:text-3xl font-playfair italic text-gold-50 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900&h=800&fit=crop&crop=center&auto=format');">
+      <i class="fas fa-kitchen-set text-3xl mr-4 drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]"></i>
+      <span class="drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">Kitchen</span>
+    </div>
+    <div class="bg-dark-300 p-8 md:p-12 flex flex-col justify-center rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none">
+      <h2 class="font-playfair text-2xl md:text-3xl text-gold-50 mb-4"><i class="fas fa-home text-gold-400 mr-3"></i> Home Features</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gold-50 font-light text-sm md:text-base">
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Studio / 1 / 2 Bedrooms</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Furnished Options</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Open Layouts</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Premium Appliances</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Quartz / Terrazzo Counters</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> LG Washer & Dryer</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Kohler Fixtures</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Custom Cabinetry</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Designer Lighting</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Walk-in Closets</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Keyless Entry</li>
+        <li><i class="fas fa-check text-gold-400 mr-3 w-5"></i> Hollywood Views</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BATHROOM IMAGE ===== -->
+<div class="max-w-7xl mx-auto px-3 md:px-4">
+  <div class="relative rounded-2xl overflow-hidden bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&h=600&fit=crop&crop=center&auto=format');">
+    <div class="absolute inset-0 bg-dark-300/40"></div>
+    <div class="relative z-10 py-20 md:py-28 text-center">
+      <h2 class="font-playfair text-3xl md:text-5xl font-bold tracking-widest text-gold-50 drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)]">
+        <i class="fas fa-bath text-gold-400 mr-3"></i> Luxury Bathroom Photography
+      </h2>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DISCLAIMER ===== -->
+<div class="max-w-7xl mx-auto px-3 md:px-4 py-4">
+  <div class="bg-dark-600 px-6 py-8 md:py-10 text-center border border-dark-100 text-gold-300 text-xs md:text-sm font-light tracking-wider rounded-2xl">
+    <i class="fas fa-info-circle text-gold-400 mr-2 text-base"></i>
+    Each amenity may not be available in every unit. Amenities, fees, and concessions are subject to change without prior notice unless included in the lease agreement.
+  </div>
+</div>
+
+</body>
+</html>
