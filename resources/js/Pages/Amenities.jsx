@@ -132,7 +132,7 @@ const residentAmenitiesList = [
     },
     {
         title: "State-of-the-art fitness center",
-        desc: "Cardio machines, free weights, functional training and 24/7 keyless access",
+        desc: "Cardio machines, free weights, functional training, and keyless resident access",
         icon: Dumbbell,
         tag: "Fitness",
     },

@@ -217,7 +217,7 @@ export default function Contact() {
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105"
                         style={{
-                            backgroundImage: `url(${APP_CONFIG.HOME_URL}pic1/CLUBROOM.png)`,
+                            backgroundImage: `url("${APP_CONFIG.HOME_URL}pic/Coworking%20Room.webp")`,
                         }}
                     >
                         {/* Pure Cinematic Tint: Crisp contrast without any foggy white overlay */}
@@ -330,7 +330,7 @@ export default function Contact() {
                                 </div>
 
                                 <h2 className="font-cormorant text-2xl sm:text-3xl font-bold text-[#1a1f2c]">
-                                    The 900 Residences
+                                    The 900 Apartments
                                 </h2>
 
                                 <p className="text-xs sm:text-sm text-[#5a627a] mt-2 leading-relaxed font-normal">

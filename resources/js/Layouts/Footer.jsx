@@ -289,14 +289,7 @@ export default function Footer() {
                     </div>
 
                     {/* CALIFORNIA & LOS ANGELES FAIR HOUSING COMPLIANCE NOTICE */}
-                    <div className="text-[11px] leading-relaxed text-[#68718e] text-center sm:text-left border-t border-[#d0d3df] pt-3">
-                        <p>
-                            <strong>Equal Housing Opportunity:</strong> The 900 complies with the Federal Fair Housing Act, California Fair Employment and Housing Act (FEHA), and the Unruh Civil Rights Act. We welcome requests for reasonable accommodations and modifications for persons with disabilities. 
-                            <span className="block sm:inline sm:ml-2">
-                                <strong>Hearing/Speech Impaired (TTY):</strong> California Relay Service — Dial <strong>711</strong>.
-                            </span>
-                        </p>
-                    </div>
+                   
                 </div>
             </div>
         </footer>

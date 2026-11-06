@@ -59,7 +59,7 @@ const MenuOverlay = ({ isOpen, onClose }) => {
             subtitle: "Connect With Our Team",
             href: route("Contact"),
             route: "Contact",
-            image: `${APP_CONFIG.HOME_URL}pic1/CLUBROOM.png`,
+            image: `${APP_CONFIG.HOME_URL}pic/Coworking%20Room.webp`, 
             tag: "LEASING OFFICE",
         },
         {

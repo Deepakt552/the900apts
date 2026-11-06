@@ -156,7 +156,7 @@ const Amenities = () => {
                 "Chilled Hydration & Refreshment Bar",
             ],
             stats: [
-                { value: "24/7", label: "Resident Access", sublabel: "Wellness Center" },
+                { value: "Exclusive", label: "Resident Access", sublabel: "Wellness Center" },
                 { value: "Technogym®", label: "Cardio & Strength", sublabel: "Elite Performance" },
             ],
             buttonText: "Explore Fitness Center",
