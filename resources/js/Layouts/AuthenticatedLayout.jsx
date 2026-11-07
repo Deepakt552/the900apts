@@ -23,7 +23,8 @@ import {
     FileSearch,
     ChevronLeft,
     ChevronRight,
-    Phone
+    Phone,
+    Megaphone
 } from "lucide-react";
 import APP_CONFIG from "../Pages/config";
 
@@ -94,6 +95,12 @@ export default function AuthenticatedLayout({ header, children }) {
             route: 'settings.mail',
             icon: Mail,
             roles: ['admin'],
+        },
+        {
+            name: "Marquee Banner",
+            route: "admin.marquee.index",
+            icon: Megaphone,
+            roles: ["admin", "Marketing"],
         },
         {
             name: "Public Links",

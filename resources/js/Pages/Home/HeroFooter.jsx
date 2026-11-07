@@ -3,10 +3,10 @@ import { Building2, Maximize2, Footprints } from 'lucide-react';
 
 const HeroFooter = () => {
   return (
-    <footer className="mt-5 sm:mt-8 md:mt-12 mb-2 sm:mb-0 w-fit max-w-[calc(100vw-32px)] sm:max-w-full
+    <footer className="mt-2 sm:mt-4 md:mt-6 lg:mt-10 mb-1 sm:mb-2 md:mb-0 w-fit max-w-[calc(100vw-32px)] sm:max-w-full
                        bg-white/95 border border-white/90
-                       backdrop-blur-xl px-3.5 sm:px-5 md:px-6 py-2.5 sm:py-3.5 
-                       rounded-2xl sm:rounded-full
+                       backdrop-blur-xl px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3.5 
+                       rounded-xl sm:rounded-full
                        shadow-[0_10px_30px_rgba(0,0,0,0.22)]
                        flex flex-nowrap items-center justify-between sm:justify-start gap-2.5 xs:gap-3 sm:gap-4 md:gap-5
                        overflow-x-auto no-scrollbar select-none">

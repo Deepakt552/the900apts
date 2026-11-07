@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ContactInquiryController;
 use App\Http\Controllers\PublicLinkController;
+use App\Http\Controllers\MarqueeSettingController;
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
@@ -194,6 +195,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function () {
     Route::resource('users', UserController::class);
+
+    // Marquee Banner Setting
+    Route::get('/marquee', [MarqueeSettingController::class, 'index'])->name('marquee.index');
+    Route::put('/marquee', [MarqueeSettingController::class, 'update'])->name('marquee.update');
 });
 
 //MailSettingController

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\PublicLink;
+use App\Models\MarqueeSetting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -43,6 +44,8 @@ class HandleInertiaRequests extends Middleware
                     'url',
                     'route_name',
                 ]),
+
+            'marquee' => fn() => MarqueeSetting::first(),
         ];
     }
 }

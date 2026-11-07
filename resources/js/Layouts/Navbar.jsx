@@ -7,6 +7,7 @@ import { Link } from "@inertiajs/react";
 import { Phone, Mail } from "lucide-react";
 
 import RotatingBadge from '../Pages/Home/RotatingBadge';
+import MarqueeBanner from '../Components/MarqueeBanner';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -109,20 +110,23 @@ const Navbar = () => {
         Skip to main content
       </a>
 
-      <header
-        ref={navbarRef}
-        role="banner"
-        aria-label="Site Header"
-        className="
-          fixed top-0 left-0 w-full h-[48px] md:h-[62px]
-          flex items-center
-          z-[100]
-          px-0 pr-2 sm:pr-[18px] md:pr-[45px]
-          border-b border-[#c77950]
-          transition-all duration-300
-          bg-white/95 backdrop-blur-[20px] shadow-[0_4px_25px_rgba(30,35,60,0.08)]
-        "
-      >
+      <div className="fixed top-0 left-0 w-full z-[100] flex flex-col pointer-events-auto">
+        {/* Modern Looping Marquee Banner (Controlled via Admin Dashboard) */}
+        <MarqueeBanner />
+
+        <header
+          ref={navbarRef}
+          role="banner"
+          aria-label="Site Header"
+          className="
+            relative w-full h-[48px] md:h-[62px]
+            flex items-center
+            px-0 pr-2 sm:pr-[18px] md:pr-[45px]
+            border-b border-[#c77950]
+            transition-all duration-300
+            bg-white/95 backdrop-blur-[20px] shadow-[0_4px_25px_rgba(30,35,60,0.08)]
+          "
+        >
 
         {/* =========================
             LOGO
@@ -299,6 +303,7 @@ const Navbar = () => {
         </div>
 
       </header>
+      </div>
 
 
       {/* MENU OVERLAY */}

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { usePage } from '@inertiajs/react';
 import HeroBackground from './HeroBackground';
 import HeroContent from './HeroContent';
 import HeroFooter from './HeroFooter';
@@ -6,6 +7,8 @@ import HeroFooter from './HeroFooter';
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef(null);
+  const { marquee } = usePage()?.props || {};
+  const hasMarquee = Boolean(marquee?.is_active && marquee?.text);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -39,19 +42,31 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="relative w-full h-[100dvh] min-h-[100dvh] max-h-[100dvh] overflow-hidden bg-[#1a73b5] 
                  shadow-[0_25px_80px_rgba(0,0,0,0.8)] max-w-full
                  transform-gpu flex flex-col justify-between"
     >
       <HeroBackground mousePosition={mousePosition} />
-      <div className="relative z-10 pointer-events-auto flex flex-col justify-between h-full min-h-full px-4 sm:px-6 md:px-10 pt-[58px] sm:pt-16 md:pt-20 pb-3 sm:pb-6">
-        <HeroContent />
+
+
+
+      <div className={`relative z-10 pointer-events-auto flex flex-col justify-between h-full min-h-full px-4 sm:px-6 md:px-10 pb-2.5 sm:pb-4 md:pb-6 transition-all duration-300 ${
+        hasMarquee
+          ? 'pt-[88px] sm:pt-[94px] md:pt-[100px] lg:pt-[108px]'
+          : 'pt-[52px] sm:pt-[58px] md:pt-16 lg:pt-20'
+      }`}>
+        <div className="flex flex-col w-full">
+
+
+          <HeroContent />
+        </div>
+
         <HeroFooter />
       </div>
     </div>
   );
 };
 
-export default HeroSection;
+export default HeroSection;
